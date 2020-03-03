@@ -8,6 +8,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from logic.main import error_msg
 
 
 class Ui_D_NewPCFolder(object):
@@ -89,6 +90,7 @@ class Ui_D_NewPCFolder(object):
         QtCore.QMetaObject.connectSlotsByName(D_NewPCFolder)
 
         self.pushButton_add.clicked.connect(self.addProductCode)
+        self.pushButton_remove.clicked.connect(self.removeProductCode)
         self.pushButton_close.clicked.connect(QtWidgets.qApp.quit)
 
     def retranslateUi(self, D_NewPCFolder):
@@ -117,22 +119,44 @@ class Ui_D_NewPCFolder(object):
         self.pushButton_close.setText(_translate("D_NewPCFolder", "Close"))
 
     def addProductCode(self):
-        rowPosition = self.tableWidget_ProductCode.rowCount()
-        productCode = self.lineEdit_productCode.text()
-        printing_type = self.comboBox_printingType.currentText()
-        checkBox_subProgram = QtWidgets.QCheckBox()
-        checkBox_logo = QtWidgets.QCheckBox()
-        self.tableWidget_ProductCode.insertRow(rowPosition)
-        item = QtWidgets.QTableWidgetItem(productCode)
-        item.setTextAlignment(QtCore.Qt.AlignCenter)
-        self.tableWidget_ProductCode.setItem(rowPosition, 0, item)
-        item = QtWidgets.QTableWidgetItem(printing_type)
-        item.setTextAlignment(QtCore.Qt.AlignCenter)
-        self.tableWidget_ProductCode.setItem(rowPosition, 1, item)
-        # item = QtWidgets.QTableWidgetItem(checkBox_subProgram)
-        # item.setTextAlignment(QtCore.Qt.AlignCenter)
-        # self.tableWidget_ProductCode.setItem(rowPosition, 2, item)
+        if self.comboBox_printingType.currentIndex() != 0:
+            rowPosition = self.tableWidget_ProductCode.rowCount()
+            productCode = self.lineEdit_productCode.text()
+            printing_type = self.comboBox_printingType.currentText()
+            self.tableWidget_ProductCode.insertRow(rowPosition)
+            item = QtWidgets.QTableWidgetItem(productCode)
+            item.setTextAlignment(QtCore.Qt.AlignCenter)
+            self.tableWidget_ProductCode.setItem(rowPosition, 0, item)
+            item = QtWidgets.QTableWidgetItem(printing_type)
+            item.setTextAlignment(QtCore.Qt.AlignCenter)
+            self.tableWidget_ProductCode.setItem(rowPosition, 1, item)
 
+            # This block of code create and enter a checkBox to the table
+            # checkBox_subProgram = QtWidgets.QTableWidgetItem()
+            # checkBox_subProgram.setFlags(QtCore.Qt.ItemIsUserCheckable | QtCore.Qt.ItemIsEnabled)
+            # checkBox_subProgram.setCheckState(QtCore.Qt.Unchecked)
+            widget = QtWidgets.QWidget()
+            checkBox_subProgram = QtWidgets.QCheckBox()
+            layout = QtWidgets.QHBoxLayout(widget)
+            layout.addWidget(checkBox_subProgram)
+            layout.setAlignment(QtCore.Qt.AlignCenter)
+            layout.setContentsMargins(0, 0, 0, 0)
+            widget.setLayout(layout)
+            self.tableWidget_ProductCode.setCellWidget(rowPosition, 2, widget)
+            widget = QtWidgets.QWidget()
+            checkBox_logo = QtWidgets.QCheckBox()
+            layout = QtWidgets.QHBoxLayout(widget)
+            layout.addWidget(checkBox_logo)
+            layout.setAlignment(QtCore.Qt.AlignCenter)
+            layout.setContentsMargins(0, 0, 0, 0)
+            widget.setLayout(layout)
+            self.tableWidget_ProductCode.setCellWidget(rowPosition, 3, widget)
+        else:
+            error_msg("Must select a printing type")
+
+    def removeProductCode(self):
+        row_selected = self.tableWidget_ProductCode.currentRow()
+        self.tableWidget_ProductCode.removeRow(row_selected)
 
 if __name__ == "__main__":
     import sys
