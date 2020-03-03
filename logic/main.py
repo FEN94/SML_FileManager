@@ -8,6 +8,11 @@ found = False
 found_pc = False
 
 
+def error_msg(message):
+    error_notFound = QtWidgets.QErrorMessage()
+    error_notFound.showMessage(message)
+    error_notFound.exec()
+
 def find_testData(product_code):
     path = ""
     test_data_str = "test_" + product_code + ".xlsx"
@@ -24,9 +29,7 @@ def find_testData(product_code):
                 Popen('explorer ' + '"' + path.replace('/', '\\') + '"')  # Open directory where the test data is
                 return path
     if path is None or path == "":
-        error_notFound = QtWidgets.QErrorMessage()
-        error_notFound.showMessage("Test Data not found")
-        error_notFound.exec()
+        error_msg("Test Data not Found")
 
 
 def search_pc(path, pc):
