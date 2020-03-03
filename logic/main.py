@@ -6,6 +6,8 @@ from subprocess import Popen
 
 found = False
 found_pc = False
+
+
 def find_testData(product_code):
     path = ""
     test_data_str = "test_" + product_code + ".xlsx"
@@ -26,23 +28,6 @@ def find_testData(product_code):
         error_notFound.showMessage("Test Data not found")
         error_notFound.exec()
 
-# def search(path, product_code):
-#     global found
-#     test_data_str = "test_"+product_code+".xlsx"
-#     directory_list = os.listdir(path)
-#     p = ""
-#     for i in directory_list:
-#         if test_data_str in directory_list:
-#             found = True
-#             return path
-#         else:
-#             try:
-#                 new_path = path+"/"+i
-#                 p = search(new_path, product_code)
-#                 if found is True:
-#                     return p
-#             except NotADirectoryError:
-#                 pass
 
 def search_pc(path, pc):
     global found_pc
@@ -61,16 +46,13 @@ def search_pc(path, pc):
             except NotADirectoryError:
                 pass
 
-# def search_approval(pc_list, printing_type):
-#     src_path = "C:/GMC/"+printing_type
-#     pc_path = search_pc(src_path, "CJCJCPH0XU")
-#     return pc_path
 
 def get_approval(app_path, pc):
     file_list = os.listdir(app_path)
     for approval in file_list:
         if approval[:len(pc)] == pc and approval[-3:] == "pdf":
             return approval
+
 
 def make_zip(productCode_list, printing_type):
     global found_pc
@@ -89,6 +71,7 @@ def make_zip(productCode_list, printing_type):
     for i in approval_list:
         zip_folder.write("Approvals/"+i)
     rmtree("Approvals")
+
 
 def make_folder(pc_list, sub_program, logo, printing_type):
     for pc in pc_list:
@@ -112,6 +95,7 @@ def make_folder(pc_list, sub_program, logo, printing_type):
         else:
             os.mkdir(src_path + "/WFD")
         copyfile("Checklist.xlsx", src_path + "/WFD/Checklist_" + pc + ".xlsx")
+
 
 def copy_checklist(pc_list, printing_type):
     global found_pc
