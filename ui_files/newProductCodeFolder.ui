@@ -1,40 +1,205 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Dialog</class>
- <widget class="QDialog" name="Dialog">
+ <class>D_NewPCFolder</class>
+ <widget class="QDialog" name="D_NewPCFolder">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>267</height>
+    <width>658</width>
+    <height>208</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>New Product Code Folder</string>
   </property>
-  <widget class="QGroupBox" name="groupBox">
+  <widget class="QGroupBox" name="groupBox_productCode">
    <property name="geometry">
     <rect>
      <x>10</x>
      <y>10</y>
-     <width>371</width>
+     <width>631</width>
      <height>151</height>
     </rect>
    </property>
    <property name="title">
-    <string>GroupBox</string>
+    <string>Product Code Information</string>
    </property>
-   <widget class="QTableWidget" name="tableWidget">
+   <widget class="QTableWidget" name="tableWidget_ProductCode">
     <property name="geometry">
      <rect>
-      <x>155</x>
+      <x>210</x>
       <y>10</y>
-      <width>211</width>
+      <width>411</width>
       <height>131</height>
      </rect>
     </property>
+    <property name="verticalScrollMode">
+     <enum>QAbstractItemView::ScrollPerPixel</enum>
+    </property>
+    <property name="horizontalScrollMode">
+     <enum>QAbstractItemView::ScrollPerPixel</enum>
+    </property>
+    <column>
+     <property name="text">
+      <string>Product Code</string>
+     </property>
+     <property name="textAlignment">
+      <set>AlignCenter</set>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Printing Type</string>
+     </property>
+     <property name="textAlignment">
+      <set>AlignCenter</set>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Sub-Program</string>
+     </property>
+     <property name="textAlignment">
+      <set>AlignCenter</set>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>LOGO</string>
+     </property>
+     <property name="textAlignment">
+      <set>AlignCenter</set>
+     </property>
+    </column>
    </widget>
+   <widget class="QLabel" name="label_productCode">
+    <property name="geometry">
+     <rect>
+      <x>11</x>
+      <y>29</y>
+      <width>69</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Product Code:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_printingType">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>60</y>
+      <width>67</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Printing Type:</string>
+    </property>
+   </widget>
+   <widget class="QWidget" name="">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>90</y>
+      <width>191</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <item>
+      <widget class="QPushButton" name="pushButton_add">
+       <property name="text">
+        <string>Add</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton_remove">
+       <property name="text">
+        <string>Remove</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="">
+    <property name="geometry">
+     <rect>
+      <x>92</x>
+      <y>29</y>
+      <width>111</width>
+      <height>48</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout_2">
+     <item>
+      <widget class="QLineEdit" name="lineEdit_productCode"/>
+     </item>
+     <item>
+      <widget class="QComboBox" name="comboBox">
+       <item>
+        <property name="text">
+         <string>&lt;Select type&gt;</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Arc_Thermal</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Digital</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Offset</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>PFL</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Woven</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+  <widget class="QWidget" name="">
+   <property name="geometry">
+    <rect>
+     <x>490</x>
+     <y>170</y>
+     <width>158</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <item>
+     <widget class="QPushButton" name="pushButton_create">
+      <property name="text">
+       <string>Create</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="pushButton_close">
+      <property name="text">
+       <string>Close</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
   </widget>
  </widget>
  <resources/>
