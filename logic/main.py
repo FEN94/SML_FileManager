@@ -4,7 +4,7 @@ from shutil import copyfile, rmtree
 from PyQt5 import QtWidgets
 from subprocess import Popen
 
-found = False
+#found = False
 found_pc = False
 
 
@@ -120,6 +120,23 @@ def copy_checklist(pc_list, printing_type):
         found_pc = False
         copyfile("Checklist.xlsx", path + checklist_name)
 
+
+def open_product_code(product_code):
+    srcs_list = ["C:/GMC/ARC_Thermal", "C:/GMC/Digital", "C:/GMC/Offset",
+                 "C:/GMC/PFL", "C:/GMC/Woven"]
+    path = ""
+    for src_path in srcs_list:
+        path = search_pc(src_path, product_code)
+        if path != "" and path is not None:
+            path += "/WFD"
+            Popen('explorer ' + '"' + path.replace('/', '\\') + '"')
+            break
+    if path == "" or path is None:
+        print("Product code folder not found")
+        #error_msg("Product Code folder not found")
+
+
 #make_zip({"US29HNW00C": 11, "US29HNW00E": 1, "US29M9W006":1, "US29M9W008":1}, "Offset")
-#make_folder(["VVVVCPV00X"], 4, False, False, "PFL")
+#make_folder(["US29IPV00A", "US29IPV00B"], 1, True, False, "PFL")
 #copy_checklist(["US29HNW00C", "US29HNW00E", "US29M9W006", "US29M9W008"], "Offset")
+#open_product_code("US29IPV00A")
