@@ -76,7 +76,7 @@ def make_zip(productCode_list, printing_type):
     rmtree("Approvals")
 
 
-def make_folder(pc_list, sub_program, logo, printing_type):
+def make_folder(pc_list, styles_num, sub_program, logo, printing_type):
     for pc in pc_list:
         src_path = "C:/GMC/" + printing_type
         src_path += "/" + pc[:2]
@@ -94,10 +94,22 @@ def make_folder(pc_list, sub_program, logo, printing_type):
         os.mkdir(src_path)
         if logo:
             os.mkdir(src_path + "/LOGO")
-            os.mkdir(src_path + "/WFD")
-        else:
-            os.mkdir(src_path + "/WFD")
-        copyfile("Checklist.xlsx", src_path + "/WFD/Checklist_" + pc + ".xlsx")
+            #os.mkdir(src_path + "/WFD")
+        src_path += "/WFD"
+        os.mkdir(src_path)
+        if styles_num > 1:
+            make_styles_folder(src_path, styles_num)
+        copyfile("Checklist.xlsx", src_path + "/Checklist_" + pc + ".xlsx")
+
+
+def make_styles_folder(src_path, styles_num):
+    for i in range(1, styles_num + 1):
+        if len(str(i)) == 1:
+            os.mkdir(src_path + "/00" + str(i))
+        elif len(str(i)) == 2:
+            os.mkdir(src_path + "0" + str(i))
+        elif len(str(i)) == 3:
+            os.mkdir(src_path + str(i))
 
 
 def copy_checklist(pc_list, printing_type):
@@ -109,5 +121,5 @@ def copy_checklist(pc_list, printing_type):
         copyfile("Checklist.xlsx", path + checklist_name)
 
 #make_zip({"US29HNW00C": 11, "US29HNW00E": 1, "US29M9W006":1, "US29M9W008":1}, "Offset")
-#make_folder(["JRJRIWV03V"], False, False, "PFL")
+make_folder(["VVVVCPV00X"], 4, False, False, "PFL")
 #copy_checklist(["US29HNW00C", "US29HNW00E", "US29M9W006", "US29M9W008"], "Offset")
