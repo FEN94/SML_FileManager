@@ -76,30 +76,31 @@ def make_zip(productCode_list, printing_type):
     rmtree("Approvals")
 
 
-def make_folder(pc_list, styles_num, sub_program, logo, printing_type):
+def make_folder(pc_list):
+    #[['MKAC001', printing_type, style_num, sub_program, logo]]
     for pc in pc_list:
-        src_path = "C:/GMC/" + printing_type
-        src_path += "/" + pc[:2]
+        src_path = "C:/GMC/" + pc[1]
+        src_path += "/" + pc[0][:2]
         try:
             os.mkdir(src_path)
         except FileExistsError:
             pass
-        if sub_program:
-            src_path += "/" + pc[2:4]
+        if pc[3]:
+            src_path += "/" + pc[0][2:4]
             try:
                 os.mkdir(src_path)
             except FileExistsError:
                 pass
-        src_path += "/" + pc
+        src_path += "/" + pc[0]
         os.mkdir(src_path)
-        if logo:
+        if pc[4]:
             os.mkdir(src_path + "/LOGO")
             #os.mkdir(src_path + "/WFD")
         src_path += "/WFD"
         os.mkdir(src_path)
-        if styles_num > 1:
-            make_styles_folder(src_path, styles_num)
-        copyfile("Checklist.xlsx", src_path + "/Checklist_" + pc + ".xlsx")
+        if pc[2] > 1:
+            make_styles_folder(src_path, pc[2])
+        copyfile("Checklist.xlsx", src_path + "/Checklist_" + pc[0] + ".xlsx")
 
 
 def make_styles_folder(src_path, styles_num):
@@ -137,6 +138,6 @@ def open_product_code(product_code):
 
 
 #make_zip({"US29HNW00C": 11, "US29HNW00E": 1, "US29M9W006":1, "US29M9W008":1}, "Offset")
-#make_folder(["US29IPV00A", "US29IPV00B"], 1, True, False, "PFL")
+#make_folder([["US2900A", "PFL", 2, True, False], ["US2900B", "PFL", 3, True, False]])
 #copy_checklist(["US29HNW00C", "US29HNW00E", "US29M9W006", "US29M9W008"], "Offset")
 #open_product_code("US29IPV00A")
