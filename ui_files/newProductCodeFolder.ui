@@ -147,7 +147,7 @@
       <widget class="QLineEdit" name="lineEdit_productCode"/>
      </item>
      <item>
-      <widget class="QComboBox" name="comboBox">
+      <widget class="QComboBox" name="comboBox_printingType">
        <item>
         <property name="text">
          <string>&lt;Select type&gt;</string>
