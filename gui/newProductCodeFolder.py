@@ -8,7 +8,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from logic.main import error_msg
+from logic.main import error_msg, make_folder
 
 class Ui_D_NewPCFolder(object):
     def setupUi(self, D_NewPCFolder):
@@ -66,21 +66,22 @@ class Ui_D_NewPCFolder(object):
         self.lineEdit_productCode = QtWidgets.QLineEdit(self.layoutWidget1)
         self.lineEdit_productCode.setObjectName("lineEdit_productCode")
         self.verticalLayout_2.addWidget(self.lineEdit_productCode)
-        self.comboBox = QtWidgets.QComboBox(self.layoutWidget1)
-        self.comboBox.setObjectName("comboBox")
-        self.comboBox.addItem("")
-        self.comboBox.addItem("")
-        self.comboBox.addItem("")
-        self.comboBox.addItem("")
-        self.comboBox.addItem("")
-        self.comboBox.addItem("")
-        self.verticalLayout_2.addWidget(self.comboBox)
+        self.comboBox_printingType = QtWidgets.QComboBox(self.layoutWidget1)
+        self.comboBox_printingType.setObjectName("comboBox_printingType")
+        self.comboBox_printingType.addItem("")
+        self.comboBox_printingType.addItem("")
+        self.comboBox_printingType.addItem("")
+        self.comboBox_printingType.addItem("")
+        self.comboBox_printingType.addItem("")
+        self.comboBox_printingType.addItem("")
+        self.verticalLayout_2.addWidget(self.comboBox_printingType)
         self.label_numStyles = QtWidgets.QLabel(self.groupBox_productCode)
         self.label_numStyles.setGeometry(QtCore.QRect(10, 90, 81, 16))
         self.label_numStyles.setObjectName("label_numStyles")
         self.spinBox_numStyles = QtWidgets.QSpinBox(self.groupBox_productCode)
         self.spinBox_numStyles.setGeometry(QtCore.QRect(100, 90, 42, 22))
         self.spinBox_numStyles.setObjectName("spinBox_numStyles")
+        self.spinBox_numStyles.setValue(1)
         self.layoutWidget2 = QtWidgets.QWidget(D_NewPCFolder)
         self.layoutWidget2.setGeometry(QtCore.QRect(720, 380, 195, 30))
         self.layoutWidget2.setObjectName("layoutWidget2")
@@ -100,6 +101,7 @@ class Ui_D_NewPCFolder(object):
         self.pushButton_add.clicked.connect(self.addProductCode)
         self.pushButton_remove.clicked.connect(self.removeProductCode)
         self.pushButton_close.clicked.connect(QtWidgets.qApp.quit)
+        self.pushButton_create.clicked.connect(self.create_folders)
 
     def retranslateUi(self, D_NewPCFolder):
         _translate = QtCore.QCoreApplication.translate
@@ -119,12 +121,12 @@ class Ui_D_NewPCFolder(object):
         self.label_printingType.setText(_translate("D_NewPCFolder", "Printing Type:"))
         self.pushButton_add.setText(_translate("D_NewPCFolder", "Add"))
         self.pushButton_remove.setText(_translate("D_NewPCFolder", "Remove"))
-        self.comboBox.setItemText(0, _translate("D_NewPCFolder", "<Select type>"))
-        self.comboBox.setItemText(1, _translate("D_NewPCFolder", "Arc_Thermal"))
-        self.comboBox.setItemText(2, _translate("D_NewPCFolder", "Digital"))
-        self.comboBox.setItemText(3, _translate("D_NewPCFolder", "Offset"))
-        self.comboBox.setItemText(4, _translate("D_NewPCFolder", "PFL"))
-        self.comboBox.setItemText(5, _translate("D_NewPCFolder", "Woven"))
+        self.comboBox_printingType.setItemText(0, _translate("D_NewPCFolder", "<Select type>"))
+        self.comboBox_printingType.setItemText(1, _translate("D_NewPCFolder", "Arc_Thermal"))
+        self.comboBox_printingType.setItemText(2, _translate("D_NewPCFolder", "Digital"))
+        self.comboBox_printingType.setItemText(3, _translate("D_NewPCFolder", "Offset"))
+        self.comboBox_printingType.setItemText(4, _translate("D_NewPCFolder", "PFL"))
+        self.comboBox_printingType.setItemText(5, _translate("D_NewPCFolder", "Woven"))
         self.label_numStyles.setText(_translate("D_NewPCFolder", "No. of styles:"))
         self.pushButton_create.setText(_translate("D_NewPCFolder", "Create"))
         self.pushButton_close.setText(_translate("D_NewPCFolder", "Close"))
@@ -134,6 +136,11 @@ class Ui_D_NewPCFolder(object):
             rowPosition = self.tableWidget_ProductCode.rowCount()
             productCode = self.lineEdit_productCode.text()
             printing_type = self.comboBox_printingType.currentText()
+            num_styles = self.spinBox_numStyles.value()
+            if num_styles > 1:
+                num_styles = str(num_styles)
+            else:
+                num_styles = "1"
             self.tableWidget_ProductCode.insertRow(rowPosition)
             item = QtWidgets.QTableWidgetItem(productCode)
             item.setTextAlignment(QtCore.Qt.AlignCenter)
@@ -141,6 +148,10 @@ class Ui_D_NewPCFolder(object):
             item = QtWidgets.QTableWidgetItem(printing_type)
             item.setTextAlignment(QtCore.Qt.AlignCenter)
             self.tableWidget_ProductCode.setItem(rowPosition, 1, item)
+            item = QtWidgets.QTableWidgetItem(num_styles)
+            item.setTextAlignment(QtCore.Qt.AlignCenter)
+            self.tableWidget_ProductCode.setItem(rowPosition, 2, item)
+
 
             # This block of code create and enter a checkBox to the table
             # checkBox_subProgram = QtWidgets.QTableWidgetItem()
@@ -153,7 +164,7 @@ class Ui_D_NewPCFolder(object):
             layout.setAlignment(QtCore.Qt.AlignCenter)
             layout.setContentsMargins(0, 0, 0, 0)
             widget.setLayout(layout)
-            self.tableWidget_ProductCode.setCellWidget(rowPosition, 2, widget)
+            self.tableWidget_ProductCode.setCellWidget(rowPosition, 3, widget)
             widget = QtWidgets.QWidget()
             checkBox_logo = QtWidgets.QCheckBox()
             layout = QtWidgets.QHBoxLayout(widget)
@@ -161,13 +172,34 @@ class Ui_D_NewPCFolder(object):
             layout.setAlignment(QtCore.Qt.AlignCenter)
             layout.setContentsMargins(0, 0, 0, 0)
             widget.setLayout(layout)
-            self.tableWidget_ProductCode.setCellWidget(rowPosition, 3, widget)
+            self.tableWidget_ProductCode.setCellWidget(rowPosition, 4, widget)
         else:
             error_msg("Must select a printing type")
 
     def removeProductCode(self):
         row_selected = self.tableWidget_ProductCode.currentRow()
         self.tableWidget_ProductCode.removeRow(row_selected)
+
+
+    def create_folders(self):
+        #row = self.tableWidget_ProductCode.item(0,0).text()
+        pc_list = []
+        for row in range(self.tableWidget_ProductCode.rowCount()):
+            pc = []
+            pc.append(self.tableWidget_ProductCode.item(row, 0).text())
+            pc.append(self.tableWidget_ProductCode.item(row, 1).text())
+            pc.append(int(self.tableWidget_ProductCode.item(row, 2).text()))
+            row = self.tableWidget_ProductCode.cellWidget(row, 3)
+            if self.tableWidget_ProductCode.item(row, 3).isChecked():
+                pc.append(True)
+            else:
+                pc.append(False)
+            if self.tableWidget_ProductCode.item(row, 4).isChecked():
+                pc.append(True)
+            else:
+                pc.append(False)
+            pc_list.append(pc)
+        make_folder(pc_list)
 
 
 if __name__ == "__main__":
