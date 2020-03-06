@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>658</width>
-    <height>297</height>
+    <width>929</width>
+    <height>420</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,8 +18,8 @@
     <rect>
      <x>10</x>
      <y>10</y>
-     <width>631</width>
-     <height>241</height>
+     <width>911</width>
+     <height>361</height>
     </rect>
    </property>
    <property name="title">
@@ -28,10 +28,10 @@
    <widget class="QTableWidget" name="tableWidget_ProductCode">
     <property name="geometry">
      <rect>
-      <x>210</x>
+      <x>270</x>
       <y>10</y>
-      <width>411</width>
-      <height>221</height>
+      <width>631</width>
+      <height>341</height>
      </rect>
     </property>
     <property name="verticalScrollMode">
@@ -51,6 +51,14 @@
     <column>
      <property name="text">
       <string>Printing Type</string>
+     </property>
+     <property name="textAlignment">
+      <set>AlignCenter</set>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Number of styles</string>
      </property>
      <property name="textAlignment">
       <set>AlignCenter</set>
@@ -78,7 +86,7 @@
      <rect>
       <x>11</x>
       <y>29</y>
-      <width>69</width>
+      <width>91</width>
       <height>16</height>
      </rect>
     </property>
@@ -91,7 +99,7 @@
      <rect>
       <x>10</x>
       <y>60</y>
-      <width>67</width>
+      <width>81</width>
       <height>16</height>
      </rect>
     </property>
@@ -102,10 +110,10 @@
    <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>90</y>
-      <width>191</width>
-      <height>25</height>
+      <x>30</x>
+      <y>120</y>
+      <width>195</width>
+      <height>30</height>
      </rect>
     </property>
     <layout class="QHBoxLayout" name="horizontalLayout_2">
@@ -128,10 +136,10 @@
    <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
-      <x>92</x>
-      <y>29</y>
-      <width>111</width>
-      <height>48</height>
+      <x>100</x>
+      <y>30</y>
+      <width>139</width>
+      <height>53</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -174,14 +182,37 @@
      </item>
     </layout>
    </widget>
+   <widget class="QLabel" name="label_numStyles">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>90</y>
+      <width>81</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>No. of styles:</string>
+    </property>
+   </widget>
+   <widget class="QSpinBox" name="spinBox_numStyles">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>90</y>
+      <width>42</width>
+      <height>22</height>
+     </rect>
+    </property>
+   </widget>
   </widget>
   <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
-     <x>490</x>
-     <y>260</y>
-     <width>158</width>
-     <height>25</height>
+     <x>720</x>
+     <y>380</y>
+     <width>195</width>
+     <height>30</height>
     </rect>
    </property>
    <layout class="QHBoxLayout" name="horizontalLayout">
