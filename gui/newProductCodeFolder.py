@@ -8,7 +8,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from logic.main import error_msg, make_folder
+from logic.main import message, make_folder
 
 class Ui_D_NewPCFolder(object):
     def setupUi(self, D_NewPCFolder):
@@ -154,27 +154,17 @@ class Ui_D_NewPCFolder(object):
 
 
             # This block of code create and enter a checkBox to the table
-            # checkBox_subProgram = QtWidgets.QTableWidgetItem()
-            # checkBox_subProgram.setFlags(QtCore.Qt.ItemIsUserCheckable | QtCore.Qt.ItemIsEnabled)
-            # checkBox_subProgram.setCheckState(QtCore.Qt.Unchecked)
-            widget = QtWidgets.QWidget()
-            checkBox_subProgram = QtWidgets.QCheckBox()
-            layout = QtWidgets.QHBoxLayout(widget)
-            layout.addWidget(checkBox_subProgram)
-            layout.setAlignment(QtCore.Qt.AlignCenter)
-            layout.setContentsMargins(0, 0, 0, 0)
-            widget.setLayout(layout)
-            self.tableWidget_ProductCode.setCellWidget(rowPosition, 3, widget)
-            widget = QtWidgets.QWidget()
-            checkBox_logo = QtWidgets.QCheckBox()
-            layout = QtWidgets.QHBoxLayout(widget)
-            layout.addWidget(checkBox_logo)
-            layout.setAlignment(QtCore.Qt.AlignCenter)
-            layout.setContentsMargins(0, 0, 0, 0)
-            widget.setLayout(layout)
-            self.tableWidget_ProductCode.setCellWidget(rowPosition, 4, widget)
+            checkBox_subProgram = QtWidgets.QTableWidgetItem()
+            checkBox_subProgram.setFlags(QtCore.Qt.ItemIsUserCheckable | QtCore.Qt.ItemIsEnabled)
+            checkBox_subProgram.setCheckState(QtCore.Qt.Unchecked)
+            self.tableWidget_ProductCode.setItem(rowPosition, 3, checkBox_subProgram)
+            checkBox_logo = QtWidgets.QTableWidgetItem()
+            checkBox_logo.setFlags(QtCore.Qt.ItemIsUserCheckable | QtCore.Qt.ItemIsEnabled)
+            checkBox_logo.setCheckState(QtCore.Qt.Unchecked)
+            self.tableWidget_ProductCode.setItem(rowPosition, 4, checkBox_logo)
         else:
-            error_msg("Must select a printing type")
+            message(QtWidgets.QMessageBox.Warning, "Must select a printing type")
+
 
     def removeProductCode(self):
         row_selected = self.tableWidget_ProductCode.currentRow()
@@ -182,24 +172,23 @@ class Ui_D_NewPCFolder(object):
 
 
     def create_folders(self):
-        #row = self.tableWidget_ProductCode.item(0,0).text()
         pc_list = []
         for row in range(self.tableWidget_ProductCode.rowCount()):
             pc = []
             pc.append(self.tableWidget_ProductCode.item(row, 0).text())
             pc.append(self.tableWidget_ProductCode.item(row, 1).text())
             pc.append(int(self.tableWidget_ProductCode.item(row, 2).text()))
-            row = self.tableWidget_ProductCode.cellWidget(row, 3)
-            if self.tableWidget_ProductCode.item(row, 3).isChecked():
+            if self.tableWidget_ProductCode.item(row, 3).checkState() == 2:
                 pc.append(True)
             else:
                 pc.append(False)
-            if self.tableWidget_ProductCode.item(row, 4).isChecked():
+            if self.tableWidget_ProductCode.item(row, 4).checkState() == 2:
                 pc.append(True)
             else:
                 pc.append(False)
             pc_list.append(pc)
-        make_folder(pc_list)
+        if make_folder(pc_list):
+            message(QtWidgets.QMessageBox.Information, "Folder(s) created successfully")
 
 
 if __name__ == "__main__":
