@@ -174,10 +174,8 @@ class Ui_D_NewPCFolder(object):
     def create_folders(self):
         pc_list = []
         for row in range(self.tableWidget_ProductCode.rowCount()):
-            pc = []
-            pc.append(self.tableWidget_ProductCode.item(row, 0).text())
-            pc.append(self.tableWidget_ProductCode.item(row, 1).text())
-            pc.append(int(self.tableWidget_ProductCode.item(row, 2).text()))
+            pc = [self.tableWidget_ProductCode.item(row, 0).text().strip(), self.tableWidget_ProductCode.item(row, 1).text(),
+                  int(self.tableWidget_ProductCode.item(row, 2).text())]
             if self.tableWidget_ProductCode.item(row, 3).checkState() == 2:
                 pc.append(True)
             else:
