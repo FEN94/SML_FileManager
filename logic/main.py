@@ -91,6 +91,7 @@ def make_folder(pc_list):
             except FileExistsError:
                 pass
         src_path += "/" + pc[0]
+        rollback_folder = src_path
         os.mkdir(src_path)
         if pc[4]:
             os.mkdir(src_path + "/LOGO")
@@ -99,9 +100,10 @@ def make_folder(pc_list):
         if pc[2] > 1:
             make_styles_folder(src_path, pc[2])
         try:
-            copyfile("C:/GMC/Checklist.xlsx", src_path + "/Checklist_" + pc[0] + ".xlsx")
+            copyfile("C:/GMC/hecklist.xlsx", src_path + "/Checklist_" + pc[0] + ".xlsx")
         except FileNotFoundError:
             error_msg("Checklist not found in C:/GMC path")
+            rmtree(rollback_folder)
 
 
 def make_styles_folder(src_path, styles_num):
