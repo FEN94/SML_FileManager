@@ -1,16 +1,19 @@
 import os
 from zipfile import ZipFile
 from shutil import copyfile, rmtree
-from PyQt5 import QtWidgets
+from PyQt5.QtWidgets import QErrorMessage, QMessageBox
 from subprocess import Popen
 
 found_pc = False
 
 
-def error_msg(message):
-    error_notFound = QtWidgets.QErrorMessage()
-    error_notFound.showMessage(message)
-    error_notFound.exec()
+def message(msg_type, msg):
+    msg_window = QMessageBox()
+    msg_window.setIcon(msg_type)
+    msg_window.setText(msg)
+    msg_window.setStandardButtons(QMessageBox.Ok)
+    msg_window.show()
+    msg_window.exec()
 
 def find_testData(product_code):
     path = ""
@@ -92,18 +95,24 @@ def make_folder(pc_list):
                 pass
         src_path += "/" + pc[0]
         rollback_folder = src_path
-        os.mkdir(src_path)
-        if pc[4]:
-            os.mkdir(src_path + "/LOGO")
-        src_path += "/WFD"
-        os.mkdir(src_path)
-        if pc[2] > 1:
-            make_styles_folder(src_path, pc[2])
         try:
-            copyfile("C:/GMC/hecklist.xlsx", src_path + "/Checklist_" + pc[0] + ".xlsx")
-        except FileNotFoundError:
-            error_msg("Checklist not found in C:/GMC path")
-            rmtree(rollback_folder)
+            os.mkdir(src_path)
+            if pc[4]:
+                os.mkdir(src_path + "/LOGO")
+            src_path += "/WFD"
+            os.mkdir(src_path)
+            if pc[2] > 1:
+                make_styles_folder(src_path, pc[2])
+            try:
+                copyfile("C:/GMC/Checklist.xlsx", src_path + "/Checklist_" + pc[0] + ".xlsx")
+                # message(QMessageBox.Information, "Folder(s) created successfully")
+            except FileNotFoundError:
+                message(QMessageBox.Critical, "Checklist not found in C:/GMC path")
+                rmtree(rollback_folder)
+                return False
+        except FileExistsError:
+            message(QMessageBox.Warning, pc[0] + " folder already exist")
+    return True
 
 
 def make_styles_folder(src_path, styles_num):
