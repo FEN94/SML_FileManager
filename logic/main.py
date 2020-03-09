@@ -143,4 +143,4 @@ def open_product_code(product_code):
 #make_zip({"US29HNW00C": 11, "US29HNW00E": 1, "US29M9W006":1, "US29M9W008":1}, "Offset")
 #make_folder([["US2900A", "PFL", 2, True, False], ["US2900B", "PFL", 3, True, False]])
 #copy_checklist(["US29HNW00C", "US29HNW00E", "US29M9W006", "US29M9W008"], "Offset")
-#open_product_code("US29IPV00A")
+#open_product_code("VVVVCPV00T".strip())
