@@ -4,7 +4,6 @@ from shutil import copyfile, rmtree
 from PyQt5 import QtWidgets
 from subprocess import Popen
 
-#found = False
 found_pc = False
 
 
@@ -95,12 +94,14 @@ def make_folder(pc_list):
         os.mkdir(src_path)
         if pc[4]:
             os.mkdir(src_path + "/LOGO")
-            #os.mkdir(src_path + "/WFD")
         src_path += "/WFD"
         os.mkdir(src_path)
         if pc[2] > 1:
             make_styles_folder(src_path, pc[2])
-        copyfile("Checklist.xlsx", src_path + "/Checklist_" + pc[0] + ".xlsx")
+        try:
+            copyfile("C:/GMC/Checklist.xlsx", src_path + "/Checklist_" + pc[0] + ".xlsx")
+        except FileNotFoundError:
+            error_msg("Checklist not found in C:/GMC path")
 
 
 def make_styles_folder(src_path, styles_num):
@@ -111,15 +112,6 @@ def make_styles_folder(src_path, styles_num):
             os.mkdir(src_path + "0" + str(i))
         elif len(str(i)) == 3:
             os.mkdir(src_path + str(i))
-
-
-def copy_checklist(pc_list, printing_type):
-    global found_pc
-    for pc in pc_list:
-        checklist_name = "Checklist_" + pc + ".xlsx"
-        path = search_pc("C:/GMC/" + printing_type, pc) + "/WFD/"
-        found_pc = False
-        copyfile("Checklist.xlsx", path + checklist_name)
 
 
 def open_product_code(product_code):
