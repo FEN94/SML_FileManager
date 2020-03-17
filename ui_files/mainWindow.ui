@@ -2,24 +2,130 @@
 <ui version="4.0">
  <class>D_MainWindow</class>
  <widget class="QMainWindow" name="D_MainWindow">
+  <property name="enabled">
+   <bool>true</bool>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>599</height>
+    <width>345</width>
+    <height>255</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>SML File Manager</string>
   </property>
-  <widget class="QWidget" name="centralwidget"/>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QGroupBox" name="groupBox">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>20</y>
+      <width>321</width>
+      <height>101</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>Find Product Code</string>
+    </property>
+    <widget class="QLabel" name="label_productCode">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>30</y>
+       <width>71</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Product Code:</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_productCode">
+     <property name="geometry">
+      <rect>
+       <x>90</x>
+       <y>30</y>
+       <width>111</width>
+       <height>20</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_printingType">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>60</y>
+       <width>71</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Printing Type:</string>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="comboBox_printingType">
+     <property name="geometry">
+      <rect>
+       <x>90</x>
+       <y>60</y>
+       <width>111</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <item>
+      <property name="text">
+       <string>&lt;Select&gt;</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Arc_Thermal</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Digital</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Offset</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>PFL</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Woven</string>
+      </property>
+     </item>
+    </widget>
+    <widget class="QPushButton" name="pushButton">
+     <property name="geometry">
+      <rect>
+       <x>210</x>
+       <y>62</y>
+       <width>101</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Open</string>
+     </property>
+    </widget>
+   </widget>
+  </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
+     <width>345</width>
      <height>21</height>
     </rect>
    </property>
