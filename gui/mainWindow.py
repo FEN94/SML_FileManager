@@ -77,3 +77,12 @@ class Ui_D_MainWindow(object):
         self.menuTools.setTitle(_translate("D_MainWindow", "Tools"))
         self.actionNew_Product_Code_Folder.setText(_translate("D_MainWindow", "New Product Code Folder"))
         self.actionFind_Test_Data.setText(_translate("D_MainWindow", "Find Test Data"))
+
+if __name__ == "__main__":
+    import sys
+    app = QtWidgets.QApplication(sys.argv)
+    Dialog = QtWidgets.QDialog()
+    ui = Ui_D_MainWindow()
+    ui.setupUi(Dialog)
+    Dialog.show()
+    sys.exit(app.exec_())

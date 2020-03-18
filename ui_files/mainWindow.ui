@@ -134,7 +134,6 @@
      <string>Tools</string>
     </property>
     <addaction name="actionNew_Product_Code_Folder"/>
-    <addaction name="actionFind_Test_Data"/>
    </widget>
    <addaction name="menuTools"/>
   </widget>
