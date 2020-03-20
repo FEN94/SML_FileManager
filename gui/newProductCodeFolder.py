@@ -98,6 +98,7 @@ class Ui_D_NewPCFolder(object):
         self.retranslateUi(D_NewPCFolder)
         QtCore.QMetaObject.connectSlotsByName(D_NewPCFolder)
 
+        ################Events and Actions################
         self.pushButton_add.clicked.connect(self.addProductCode)
         self.pushButton_remove.clicked.connect(self.removeProductCode)
         self.pushButton_close.clicked.connect(QtWidgets.qApp.quit)

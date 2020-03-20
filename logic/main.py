@@ -136,8 +136,7 @@ def open_product_code(product_code):
             Popen('explorer ' + '"' + path.replace('/', '\\') + '"')
             break
     if path == "" or path is None:
-        print("Product code folder not found")
-        #error_msg("Product Code folder not found")
+        message(QMessageBox.Critical, "Product Code not found")
 
 
 #make_zip({"US29HNW00C": 11, "US29HNW00E": 1, "US29M9W006":1, "US29M9W008":1}, "Offset")
