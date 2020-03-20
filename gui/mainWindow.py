@@ -10,6 +10,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from gui.newProductCodeFolder import Ui_D_NewPCFolder
 from logic.main import open_product_code
+import sys
 
 
 class Ui_MainWindow(object):
@@ -62,20 +63,17 @@ class Ui_MainWindow(object):
         self.actionNew_PC_folder_s.setText(_translate("MainWindow", "New PC folder(s)"))
 
     def open_productcode(self):
-        open_product_code(self.lineEdit_productcode.text())
+        open_product_code(self.lineEdit_productcode.text().strip())
 
     def newPCFolder(self):
-        import sys
-        app = QtWidgets.QApplication(sys.argv)
-        Dialog = QtWidgets.QDialog()
+        newPCFolderWindow = QtWidgets.QDialog()
         ui = Ui_D_NewPCFolder()
-        ui.setupUi(Dialog)
-        Dialog.show()
-        sys.exit(app.exec_())
+        ui.setupUi(newPCFolderWindow)
+        newPCFolderWindow.setModal(True)
+        newPCFolderWindow.exec()
 
 
 if __name__ == "__main__":
-    import sys
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
     ui = Ui_MainWindow()

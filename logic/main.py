@@ -134,6 +134,8 @@ def open_product_code(product_code):
         if path != "" and path is not None:
             path += "/WFD"
             Popen('explorer ' + '"' + path.replace('/', '\\') + '"')
+            global found_pc
+            found_pc = False
             break
     if path == "" or path is None:
         message(QMessageBox.Critical, "Product Code not found")
