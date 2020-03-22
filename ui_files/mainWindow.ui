@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>277</width>
-    <height>162</height>
+    <width>271</width>
+    <height>175</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -69,7 +69,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>277</width>
+     <width>271</width>
      <height>21</height>
     </rect>
    </property>
@@ -78,13 +78,32 @@
      <string>Tools</string>
     </property>
     <addaction name="actionNew_PC_folder_s"/>
+    <addaction name="separator"/>
+    <addaction name="actionOpen_GMC_Tool"/>
+   </widget>
+   <widget class="QMenu" name="menuSettings">
+    <property name="title">
+     <string>Settings</string>
+    </property>
+    <addaction name="actionConfigure_Path"/>
    </widget>
    <addaction name="menuTools"/>
+   <addaction name="menuSettings"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionNew_PC_folder_s">
    <property name="text">
     <string>New PC folder(s)</string>
+   </property>
+  </action>
+  <action name="actionOpen_GMC_Tool">
+   <property name="text">
+    <string>Open GMC Tool</string>
+   </property>
+  </action>
+  <action name="actionConfigure_Path">
+   <property name="text">
+    <string>Configure Path</string>
    </property>
   </action>
  </widget>

@@ -8,15 +8,15 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from gui.newProductCodeFolder import Ui_D_NewPCFolder
+from gui.newPCFolder import Ui_D_NewPCFolder
 from logic.main import open_product_code
-import sys
+import sys, subprocess
 
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(277, 162)
+        MainWindow.setFixedSize(277, 162)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.groupBox_findpc = QtWidgets.QGroupBox(self.centralwidget)
@@ -44,6 +44,9 @@ class Ui_MainWindow(object):
         self.actionNew_PC_folder_s = QtWidgets.QAction(MainWindow)
         self.actionNew_PC_folder_s.setObjectName("actionNew_PC_folder_s")
         self.menuTools.addAction(self.actionNew_PC_folder_s)
+        self.actionGMC_tool = QtWidgets.QAction(MainWindow)
+        self.actionGMC_tool.setObjectName("actionGMC_tool")
+        self.menuTools.addAction(self.actionGMC_tool)
         self.menubar.addAction(self.menuTools.menuAction())
 
         self.retranslateUi(MainWindow)
@@ -52,15 +55,17 @@ class Ui_MainWindow(object):
         ################Events and Actions################
         self.pushButton_search.clicked.connect(self.open_productcode)
         self.actionNew_PC_folder_s.triggered.connect(self.newPCFolder)
+        self.actionGMC_tool.triggered.connect(self.openGMC_tool)
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "SML File Manager"))
         self.groupBox_findpc.setTitle(_translate("MainWindow", "Find Product Code"))
         self.label_productcode.setText(_translate("MainWindow", "Product Code:"))
         self.pushButton_search.setText(_translate("MainWindow", "Search"))
         self.menuTools.setTitle(_translate("MainWindow", "Tools"))
         self.actionNew_PC_folder_s.setText(_translate("MainWindow", "New PC folder(s)"))
+        self.actionGMC_tool.setText(_translate("MainWindow", "Open GMC Tool"))
 
     def open_productcode(self):
         open_product_code(self.lineEdit_productcode.text().strip())
@@ -71,6 +76,10 @@ class Ui_MainWindow(object):
         ui.setupUi(newPCFolderWindow)
         newPCFolderWindow.setModal(True)
         newPCFolderWindow.exec()
+
+    def openGMC_tool(self):
+        commad = "C:/GMC/Checklist.xlsx"
+        subprocess.check_output(commad, shell=True)
 
 
 if __name__ == "__main__":
