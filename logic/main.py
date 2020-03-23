@@ -15,24 +15,6 @@ def message(msg_type, msg):
     msg_window.show()
     msg_window.exec()
 
-# def find_testData(product_code):
-#     path = ""
-#     test_data_str = "test_" + product_code + ".xlsx"
-#     srcs_list = ["C:/GMC/ARC_Thermal", "C:/GMC/Digital", "C:/GMC/Offset",
-#                  "C:/GMC/PFL", "C:/GMC/Woven"]
-#     for src in srcs_list:
-#         #path = search(src, product_code)
-#         path = search_pc(src, product_code)
-#         if path != None and path != "":
-#             global found_pc
-#             path += "/WFD"
-#             found_pc = False
-#             if test_data_str in os.listdir(path):
-#                 Popen('explorer ' + '"' + path.replace('/', '\\') + '"')  # Open directory where the test data is
-#                 return path
-#     if path is None or path == "":
-#         message(QMessageBox.Critical, "Test Data not found.")
-
 
 def search_pc(path, pc):
     global found_pc
