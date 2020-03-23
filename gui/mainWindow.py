@@ -78,7 +78,7 @@ class Ui_MainWindow(object):
         newPCFolderWindow.exec()
 
     def openGMC_tool(self):
-        commad = "C:/GMC/Checklist.xlsx"
+        commad = "C:/GMC/GMC_2020.jar"
         subprocess.check_output(commad, shell=True)
 
 
