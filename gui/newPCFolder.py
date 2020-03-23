@@ -14,7 +14,7 @@ from logic.main import message, make_folder
 class Ui_D_NewPCFolder(object):
     def setupUi(self, D_NewPCFolder):
         D_NewPCFolder.setObjectName("D_NewPCFolder")
-        D_NewPCFolder.resize(929, 420)
+        D_NewPCFolder.setFixedSize(929, 420)
         self.groupBox_productCode = QtWidgets.QGroupBox(D_NewPCFolder)
         self.groupBox_productCode.setGeometry(QtCore.QRect(10, 10, 911, 361))
         self.groupBox_productCode.setObjectName("groupBox_productCode")
@@ -82,6 +82,7 @@ class Ui_D_NewPCFolder(object):
         self.spinBox_numStyles = QtWidgets.QSpinBox(self.groupBox_productCode)
         self.spinBox_numStyles.setGeometry(QtCore.QRect(100, 90, 42, 22))
         self.spinBox_numStyles.setObjectName("spinBox_numStyles")
+        self.spinBox_numStyles.setValue(1)
         self.pushButton_create = QtWidgets.QPushButton(D_NewPCFolder)
         self.pushButton_create.setGeometry(QtCore.QRect(840, 390, 75, 24))
         self.pushButton_create.setObjectName("pushButton_create")
@@ -122,7 +123,11 @@ class Ui_D_NewPCFolder(object):
         self.pushButton_create.setText(_translate("D_NewPCFolder", "Create"))
 
     def addProductCode(self):
-        if self.comboBox_printingType.currentIndex() != 0:
+        if self.lineEdit_productCode.text() == "":
+            message(QtWidgets.QMessageBox.Warning, "Product Code field cannot be empty")
+        elif self.comboBox_printingType.currentIndex() == 0:
+            message(QtWidgets.QMessageBox.Warning, "Must select a printing type")
+        else:
             rowPosition = self.tableWidget_ProductCode.rowCount()
             productCode = self.lineEdit_productCode.text()
             printing_type = self.comboBox_printingType.currentText()
@@ -142,7 +147,6 @@ class Ui_D_NewPCFolder(object):
             item.setTextAlignment(QtCore.Qt.AlignCenter)
             self.tableWidget_ProductCode.setItem(rowPosition, 2, item)
 
-
             # This block of code create and enter a checkBox to the table
             checkBox_subProgram = QtWidgets.QTableWidgetItem()
             checkBox_subProgram.setFlags(QtCore.Qt.ItemIsUserCheckable | QtCore.Qt.ItemIsEnabled)
@@ -152,8 +156,6 @@ class Ui_D_NewPCFolder(object):
             checkBox_logo.setFlags(QtCore.Qt.ItemIsUserCheckable | QtCore.Qt.ItemIsEnabled)
             checkBox_logo.setCheckState(QtCore.Qt.Unchecked)
             self.tableWidget_ProductCode.setItem(rowPosition, 4, checkBox_logo)
-        else:
-            message(QtWidgets.QMessageBox.Warning, "Must select a printing type")
 
 
     def removeProductCode(self):
@@ -163,27 +165,41 @@ class Ui_D_NewPCFolder(object):
 
     def create_folders(self):
         pc_list = []
-        for row in range(self.tableWidget_ProductCode.rowCount()):
-            pc = [self.tableWidget_ProductCode.item(row, 0).text().strip(), self.tableWidget_ProductCode.item(row, 1).text(),
-                  int(self.tableWidget_ProductCode.item(row, 2).text())]
-            if self.tableWidget_ProductCode.item(row, 3).checkState() == 2:
-                pc.append(True)
-            else:
-                pc.append(False)
-            if self.tableWidget_ProductCode.item(row, 4).checkState() == 2:
-                pc.append(True)
-            else:
-                pc.append(False)
-            pc_list.append(pc)
-        if make_folder(pc_list):
-            message(QtWidgets.QMessageBox.Information, "Folder(s) created successfully")
+        if self.tableWidget_ProductCode.rowCount() != 0:
+            for row in range(self.tableWidget_ProductCode.rowCount()):
+                pc = [self.tableWidget_ProductCode.item(row, 0).text().strip(),
+                      self.tableWidget_ProductCode.item(row, 1).text(),
+                      int(self.tableWidget_ProductCode.item(row, 2).text())]
+                if self.tableWidget_ProductCode.item(row, 3).checkState() == 2:
+                    pc.append(True)
+                else:
+                    pc.append(False)
+                if self.tableWidget_ProductCode.item(row, 4).checkState() == 2:
+                    pc.append(True)
+                else:
+                    pc.append(False)
+                pc_list.append(pc)
+            if make_folder(pc_list):
+                message(QtWidgets.QMessageBox.Information, "Folder(s) created successfully")
+                self.reset_values()
+        else:
+            message(QtWidgets.QMessageBox.Warning, "Table cannot be empty")
+
+    def reset_values(self):
+        for i in range(self.tableWidget_ProductCode.rowCount()):
+            self.tableWidget_ProductCode.removeRow(0)
+        self.lineEdit_productCode.clear()
+        self.spinBox_numStyles.setValue(1)
+        index = self.comboBox_printingType.findText("<Select type>", QtCore.Qt.MatchFixedString)
+        if index >= 0:
+            self.comboBox_printingType.setCurrentIndex(index)
 
 
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    D_NewPCFolder = QtWidgets.QDialog()
-    ui = Ui_D_NewPCFolder()
-    ui.setupUi(D_NewPCFolder)
-    D_NewPCFolder.show()
-    sys.exit(app.exec_())
+# if __name__ == "__main__":
+#     import sys
+#     app = QtWidgets.QApplication(sys.argv)
+#     D_NewPCFolder = QtWidgets.QDialog()
+#     ui = Ui_D_NewPCFolder()
+#     ui.setupUi(D_NewPCFolder)
+#     D_NewPCFolder.show()
+#     sys.exit(app.exec_())
