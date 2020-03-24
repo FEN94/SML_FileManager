@@ -10,7 +10,9 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from gui.newPCFolder import Ui_D_NewPCFolder
 from logic.main import open_product_code
-import sys, subprocess
+import sys
+import subprocess
+import threading
 
 
 class Ui_MainWindow(object):
@@ -78,8 +80,10 @@ class Ui_MainWindow(object):
         newPCFolderWindow.exec()
 
     def openGMC_tool(self):
-        commad = "C:/GMC/GMC_2020.jar"
-        subprocess.check_output(commad, shell=True)
+        def thread():
+            commad = "C:/GMC/GMC_2020.jar"
+            subprocess.check_output(commad, shell=True)
+        threading.Thread(target=thread).start()
 
 
 if __name__ == "__main__":
