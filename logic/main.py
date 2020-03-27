@@ -1,7 +1,7 @@
 import os
 from zipfile import ZipFile
 from shutil import copyfile, rmtree
-from PyQt5.QtWidgets import QErrorMessage, QMessageBox
+from PyQt5.QtWidgets import QMessageBox
 from subprocess import Popen
 
 found_pc = False
