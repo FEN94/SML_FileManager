@@ -4,18 +4,11 @@ from shutil import copyfile, rmtree
 from PyQt5.QtWidgets import QMessageBox
 from subprocess import Popen
 
+
 class MainController():
 
     def __init__(self):
         self.found_pc = False
-
-    def message(self, msg_type, msg):
-        msg_window = QMessageBox()
-        msg_window.setIcon(msg_type)
-        msg_window.setText(msg)
-        msg_window.setStandardButtons(QMessageBox.Ok)
-        msg_window.show()
-        msg_window.exec()
 
     def search_pc(self, path, pc):
         file_list = os.listdir(path)

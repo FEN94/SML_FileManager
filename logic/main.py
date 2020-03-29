@@ -94,6 +94,7 @@ def make_folder(pc_list):
                 return False
         except FileExistsError:
             message(QMessageBox.Warning, pc[0] + " folder already exist")
+            return False
     return True
 
 
