@@ -7,9 +7,10 @@
 # WARNING! All changes made in this file will be lost!
 
 
-from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5 import QtCore, QtWidgets
 from gui.newPCFolder import Ui_D_NewPCFolder
 from logic.main import open_product_code
+from logic.main import message
 import sys
 import subprocess
 import threading
@@ -68,9 +69,11 @@ class Ui_MainWindow(object):
         self.menuTools.setTitle(_translate("MainWindow", "Tools"))
         self.actionNew_PC_folder_s.setText(_translate("MainWindow", "New PC folder(s)"))
         self.actionGMC_tool.setText(_translate("MainWindow", "Open GMC Tool"))
+##################################################################################################################
 
     def open_productcode(self):
-        open_product_code(self.lineEdit_productcode.text().strip())
+        if open_product_code(self.lineEdit_productcode.text().strip()) is False:
+            message(QtWidgets.QMessageBox.Critical, "Product Code not found")
 
     def newPCFolder(self):
         newPCFolderWindow = QtWidgets.QDialog()

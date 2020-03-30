@@ -61,7 +61,7 @@ def make_zip(productCode_list, printing_type):
 
 
 def make_folder(pc_list):
-    #[['MKAC001', printing_type, style_num, sub_program, logo]]
+    # [['MKAC001', printing_type, style_num, sub_program, logo]]
     for pc in pc_list:
         src_path = "C:/GMC/" + pc[1]
         src_path += "/" + pc[0][:2]
@@ -108,6 +108,32 @@ def make_styles_folder(src_path, styles_num):
             os.mkdir(src_path + str(i))
 
 
+def gmc_product_code(product_code, printing_type):
+    src_path = "C:/GMC/" + printing_type
+    path = search_pc(src_path, product_code)
+    if path != "" and path is not None:
+        path += "/WFD"
+        Popen('explorer ' + '"' + path.replace('/', '\\') + '"')
+        global found_pc
+        found_pc = False
+    else:
+        return False
+
+def nicelabel_product_code(product_code):
+    path = search_pc("C:/NiceLabel/Thermal", product_code)
+    if path != "" and path is not None:
+        Popen('explorer ' + '"' + path.replace('/', '\\') + '"')
+        global found_pc
+        found_pc = False
+    else:
+        return False
+
+def open_product_code1(gmc_or_nl, product_code, printing_type):
+    if gmc_or_nl == 0:
+        gmc_product_code(product_code, printing_type)
+    elif gmc_or_nl == 1:
+        nicelabel_product_code(product_code)
+
 def open_product_code(product_code):
     srcs_list = ["C:/GMC/ARC_Thermal", "C:/GMC/Digital", "C:/GMC/Offset",
                  "C:/GMC/PFL", "C:/GMC/Woven"]
@@ -121,10 +147,10 @@ def open_product_code(product_code):
             found_pc = False
             break
     if path == "" or path is None:
-        message(QMessageBox.Critical, "Product Code not found")
+        return False
 
-
-#make_zip({"US29HNW00C": 11, "US29HNW00E": 1, "US29M9W006":1, "US29M9W008":1}, "Offset")
-#make_folder([["US2900A", "PFL", 2, True, False], ["US2900B", "PFL", 3, True, False]])
-#copy_checklist(["US29HNW00C", "US29HNW00E", "US29M9W006", "US29M9W008"], "Offset")
-#open_product_code("ONBAMKV001".strip())
+# make_zip({"US29HNW00C": 11, "US29HNW00E": 1, "US29M9W006":1, "US29M9W008":1}, "Offset")
+# make_folder([["US2900A", "PFL", 2, True, False], ["US2900B", "PFL", 3, True, False]])
+# copy_checklist(["US29HNW00C", "US29HNW00E", "US29M9W006", "US29M9W008"], "Offset")
+# open_product_code("ONBAMKV001".strip())
+# gmc_product_code("MKACMNV001".strip(), "PFL".strip())
