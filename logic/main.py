@@ -128,26 +128,11 @@ def nicelabel_product_code(product_code):
     else:
         return False
 
-def open_product_code1(gmc_or_nl, product_code, printing_type):
+def open_product_code(gmc_or_nl, product_code, printing_type):
     if gmc_or_nl == 0:
-        gmc_product_code(product_code, printing_type)
+        return gmc_product_code(product_code, printing_type)
     elif gmc_or_nl == 1:
-        nicelabel_product_code(product_code)
-
-def open_product_code(product_code):
-    srcs_list = ["C:/GMC/ARC_Thermal", "C:/GMC/Digital", "C:/GMC/Offset",
-                 "C:/GMC/PFL", "C:/GMC/Woven"]
-    path = ""
-    for src_path in srcs_list:
-        path = search_pc(src_path, product_code)
-        if path != "" and path is not None:
-            path += "/WFD"
-            Popen('explorer ' + '"' + path.replace('/', '\\') + '"')
-            global found_pc
-            found_pc = False
-            break
-    if path == "" or path is None:
-        return False
+        return nicelabel_product_code(product_code)
 
 # make_zip({"US29HNW00C": 11, "US29HNW00E": 1, "US29M9W006":1, "US29M9W008":1}, "Offset")
 # make_folder([["US2900A", "PFL", 2, True, False], ["US2900B", "PFL", 3, True, False]])
