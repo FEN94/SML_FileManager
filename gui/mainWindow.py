@@ -20,7 +20,7 @@ import threading
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(270, 213)
+        MainWindow.setFixedSize(270, 213)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.groupBox_findpc = QtWidgets.QGroupBox(self.centralwidget)
