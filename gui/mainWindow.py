@@ -131,10 +131,10 @@ class Ui_MainWindow(object):
             message(QtWidgets.QMessageBox.Warning, "Must select a printing type.")
         else:
             if self.radioButton_gmc.isChecked():
-                success = open_product_code(0, self.lineEdit_productcode.text(),
+                success = open_product_code(0, self.lineEdit_productcode.text().strip(),
                                             self.comboBox_printingtype.currentText())
             elif self.radioButton_nice_label.isChecked():
-                success = open_product_code(1, self.lineEdit_productcode.text(), "")
+                success = open_product_code(1, self.lineEdit_productcode.text().strip(), "")
             if success is False:
                 message(QtWidgets.QMessageBox.Critical, "Product Code not found")
 
