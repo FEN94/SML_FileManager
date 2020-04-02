@@ -81,32 +81,6 @@
      </property>
     </column>
    </widget>
-   <widget class="QLabel" name="label_productCode">
-    <property name="geometry">
-     <rect>
-      <x>11</x>
-      <y>29</y>
-      <width>91</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Product Code:</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_printingType">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>60</y>
-      <width>81</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Printing Type:</string>
-    </property>
-   </widget>
    <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
@@ -133,18 +107,66 @@
      </item>
     </layout>
    </widget>
-   <widget class="QWidget" name="layoutWidget">
+   <widget class="QWidget" name="">
     <property name="geometry">
      <rect>
-      <x>100</x>
-      <y>30</y>
-      <width>139</width>
-      <height>53</height>
+      <x>11</x>
+      <y>29</y>
+      <width>210</width>
+      <height>22</height>
      </rect>
     </property>
-    <layout class="QVBoxLayout" name="verticalLayout_2">
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QLabel" name="label_productCode">
+       <property name="text">
+        <string>Product Code:</string>
+       </property>
+      </widget>
+     </item>
      <item>
       <widget class="QLineEdit" name="lineEdit_productCode"/>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>90</y>
+      <width>110</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_4">
+     <item>
+      <widget class="QLabel" name="label_numStyles">
+       <property name="text">
+        <string>No. of styles:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QSpinBox" name="spinBox_numStyles"/>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="">
+    <property name="geometry">
+     <rect>
+      <x>11</x>
+      <y>58</y>
+      <width>245</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_3">
+     <item>
+      <widget class="QLabel" name="label_printingType">
+       <property name="text">
+        <string>Printing Type:</string>
+       </property>
+      </widget>
      </item>
      <item>
       <widget class="QComboBox" name="comboBox_printingType">
@@ -180,30 +202,14 @@
        </item>
       </widget>
      </item>
+     <item>
+      <widget class="QCheckBox" name="checkBox">
+       <property name="text">
+        <string>NiceLabel</string>
+       </property>
+      </widget>
+     </item>
     </layout>
-   </widget>
-   <widget class="QLabel" name="label_numStyles">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>90</y>
-      <width>81</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>No. of styles:</string>
-    </property>
-   </widget>
-   <widget class="QSpinBox" name="spinBox_numStyles">
-    <property name="geometry">
-     <rect>
-      <x>100</x>
-      <y>90</y>
-      <width>42</width>
-      <height>22</height>
-     </rect>
-    </property>
    </widget>
   </widget>
   <widget class="QPushButton" name="pushButton_create">
