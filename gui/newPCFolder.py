@@ -7,7 +7,7 @@
 # WARNING! All changes made in this file will be lost!
 
 
-from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5 import QtCore, QtWidgets
 from logic.main import message, make_folder
 
 
@@ -23,7 +23,7 @@ class Ui_D_NewPCFolder(object):
         self.tableWidget_ProductCode.setVerticalScrollMode(QtWidgets.QAbstractItemView.ScrollPerPixel)
         self.tableWidget_ProductCode.setHorizontalScrollMode(QtWidgets.QAbstractItemView.ScrollPerPixel)
         self.tableWidget_ProductCode.setObjectName("tableWidget_ProductCode")
-        #self.tableWidget_ProductCode.setColumnCount(5)
+        # self.tableWidget_ProductCode.setColumnCount(5)
         self.tableWidget_ProductCode.setRowCount(0)
         # item = QtWidgets.QTableWidgetItem()
         # item.setTextAlignment(QtCore.Qt.AlignCenter)
@@ -40,12 +40,6 @@ class Ui_D_NewPCFolder(object):
         # item = QtWidgets.QTableWidgetItem()
         # item.setTextAlignment(QtCore.Qt.AlignCenter)
         # self.tableWidget_ProductCode.setHorizontalHeaderItem(4, item)
-        self.label_productCode = QtWidgets.QLabel(self.groupBox_productCode)
-        self.label_productCode.setGeometry(QtCore.QRect(11, 29, 91, 16))
-        self.label_productCode.setObjectName("label_productCode")
-        self.label_printingType = QtWidgets.QLabel(self.groupBox_productCode)
-        self.label_printingType.setGeometry(QtCore.QRect(10, 60, 81, 16))
-        self.label_printingType.setObjectName("label_printingType")
         self.layoutWidget = QtWidgets.QWidget(self.groupBox_productCode)
         self.layoutWidget.setGeometry(QtCore.QRect(30, 120, 195, 30))
         self.layoutWidget.setObjectName("layoutWidget")
@@ -58,16 +52,41 @@ class Ui_D_NewPCFolder(object):
         self.pushButton_remove = QtWidgets.QPushButton(self.layoutWidget)
         self.pushButton_remove.setObjectName("pushButton_remove")
         self.horizontalLayout_2.addWidget(self.pushButton_remove)
-        self.layoutWidget1 = QtWidgets.QWidget(self.groupBox_productCode)
-        self.layoutWidget1.setGeometry(QtCore.QRect(100, 30, 139, 53))
-        self.layoutWidget1.setObjectName("layoutWidget1")
-        self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.layoutWidget1)
-        self.verticalLayout_2.setContentsMargins(0, 0, 0, 0)
-        self.verticalLayout_2.setObjectName("verticalLayout_2")
-        self.lineEdit_productCode = QtWidgets.QLineEdit(self.layoutWidget1)
+        self.widget = QtWidgets.QWidget(self.groupBox_productCode)
+        self.widget.setGeometry(QtCore.QRect(11, 29, 210, 22))
+        self.widget.setObjectName("widget")
+        self.horizontalLayout = QtWidgets.QHBoxLayout(self.widget)
+        self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
+        self.horizontalLayout.setObjectName("horizontalLayout")
+        self.label_productCode = QtWidgets.QLabel(self.widget)
+        self.label_productCode.setObjectName("label_productCode")
+        self.horizontalLayout.addWidget(self.label_productCode)
+        self.lineEdit_productCode = QtWidgets.QLineEdit(self.widget)
         self.lineEdit_productCode.setObjectName("lineEdit_productCode")
-        self.verticalLayout_2.addWidget(self.lineEdit_productCode)
-        self.comboBox_printingType = QtWidgets.QComboBox(self.layoutWidget1)
+        self.horizontalLayout.addWidget(self.lineEdit_productCode)
+        self.widget1 = QtWidgets.QWidget(self.groupBox_productCode)
+        self.widget1.setGeometry(QtCore.QRect(10, 90, 110, 22))
+        self.widget1.setObjectName("widget1")
+        self.horizontalLayout_4 = QtWidgets.QHBoxLayout(self.widget1)
+        self.horizontalLayout_4.setContentsMargins(0, 0, 0, 0)
+        self.horizontalLayout_4.setObjectName("horizontalLayout_4")
+        self.label_numStyles = QtWidgets.QLabel(self.widget1)
+        self.label_numStyles.setObjectName("label_numStyles")
+        self.horizontalLayout_4.addWidget(self.label_numStyles)
+        self.spinBox_numStyles = QtWidgets.QSpinBox(self.widget1)
+        self.spinBox_numStyles.setObjectName("spinBox_numStyles")
+        self.spinBox_numStyles.setValue(1)
+        self.horizontalLayout_4.addWidget(self.spinBox_numStyles)
+        self.widget2 = QtWidgets.QWidget(self.groupBox_productCode)
+        self.widget2.setGeometry(QtCore.QRect(11, 58, 245, 22))
+        self.widget2.setObjectName("widget2")
+        self.horizontalLayout_3 = QtWidgets.QHBoxLayout(self.widget2)
+        self.horizontalLayout_3.setContentsMargins(0, 0, 0, 0)
+        self.horizontalLayout_3.setObjectName("horizontalLayout_3")
+        self.label_printingType = QtWidgets.QLabel(self.widget2)
+        self.label_printingType.setObjectName("label_printingType")
+        self.horizontalLayout_3.addWidget(self.label_printingType)
+        self.comboBox_printingType = QtWidgets.QComboBox(self.widget2)
         self.comboBox_printingType.setObjectName("comboBox_printingType")
         self.comboBox_printingType.addItem("")
         self.comboBox_printingType.addItem("")
@@ -75,14 +94,10 @@ class Ui_D_NewPCFolder(object):
         self.comboBox_printingType.addItem("")
         self.comboBox_printingType.addItem("")
         self.comboBox_printingType.addItem("")
-        self.verticalLayout_2.addWidget(self.comboBox_printingType)
-        self.label_numStyles = QtWidgets.QLabel(self.groupBox_productCode)
-        self.label_numStyles.setGeometry(QtCore.QRect(10, 90, 81, 16))
-        self.label_numStyles.setObjectName("label_numStyles")
-        self.spinBox_numStyles = QtWidgets.QSpinBox(self.groupBox_productCode)
-        self.spinBox_numStyles.setGeometry(QtCore.QRect(100, 90, 42, 22))
-        self.spinBox_numStyles.setObjectName("spinBox_numStyles")
-        self.spinBox_numStyles.setValue(1)
+        self.horizontalLayout_3.addWidget(self.comboBox_printingType)
+        self.checkBox_nicelabel = QtWidgets.QCheckBox(self.widget2)
+        self.checkBox_nicelabel.setObjectName("checkBox_nicelabel")
+        self.horizontalLayout_3.addWidget(self.checkBox_nicelabel)
         self.pushButton_create = QtWidgets.QPushButton(D_NewPCFolder)
         self.pushButton_create.setGeometry(QtCore.QRect(840, 390, 75, 24))
         self.pushButton_create.setObjectName("pushButton_create")
@@ -94,6 +109,7 @@ class Ui_D_NewPCFolder(object):
         self.pushButton_add.clicked.connect(self.addProductCode)
         self.pushButton_remove.clicked.connect(self.removeProductCode)
         self.pushButton_create.clicked.connect(self.create_folders)
+        self.checkBox_nicelabel.clicked.connect(self.enable_printing_type)
 
     def retranslateUi(self, D_NewPCFolder):
         _translate = QtCore.QCoreApplication.translate
@@ -109,29 +125,41 @@ class Ui_D_NewPCFolder(object):
         # item.setText(_translate("D_NewPCFolder", "Sub-Program"))
         # item = self.tableWidget_ProductCode.horizontalHeaderItem(4)
         # item.setText(_translate("D_NewPCFolder", "LOGO"))
-        self.label_productCode.setText(_translate("D_NewPCFolder", "Product Code:"))
-        self.label_printingType.setText(_translate("D_NewPCFolder", "Printing Type:"))
         self.pushButton_add.setText(_translate("D_NewPCFolder", "Add"))
         self.pushButton_remove.setText(_translate("D_NewPCFolder", "Remove"))
+        self.label_productCode.setText(_translate("D_NewPCFolder", "Product Code:"))
+        self.label_numStyles.setText(_translate("D_NewPCFolder", "No. of styles:"))
+        self.label_printingType.setText(_translate("D_NewPCFolder", "Printing Type:"))
         self.comboBox_printingType.setItemText(0, _translate("D_NewPCFolder", "<Select type>"))
         self.comboBox_printingType.setItemText(1, _translate("D_NewPCFolder", "Arc_Thermal"))
         self.comboBox_printingType.setItemText(2, _translate("D_NewPCFolder", "Digital"))
         self.comboBox_printingType.setItemText(3, _translate("D_NewPCFolder", "Offset"))
         self.comboBox_printingType.setItemText(4, _translate("D_NewPCFolder", "PFL"))
         self.comboBox_printingType.setItemText(5, _translate("D_NewPCFolder", "Woven"))
-        self.label_numStyles.setText(_translate("D_NewPCFolder", "No. of styles:"))
+        self.checkBox_nicelabel.setText(_translate("D_NewPCFolder", "NiceLabel"))
         self.pushButton_create.setText(_translate("D_NewPCFolder", "Create"))
 
     ##################################################################################################################
 
-    def is_gmc(self):
-        width = int(self.tableWidget_ProductCode.width() / 5)
-        self.tableWidget_ProductCode.setColumnCount(5)
+    def enable_printing_type(self):
+        if self.checkBox_nicelabel.isChecked():
+            self.comboBox_printingType.setEnabled(False)
+        else:
+            self.comboBox_printingType.setEnabled(True)
+
+    def create_table(self):
+        if self.checkBox_nicelabel.isChecked() is False:
+            width = int(self.tableWidget_ProductCode.width() / 5)
+            self.tableWidget_ProductCode.setColumnCount(5)
+        else:
+            width = int(self.tableWidget_ProductCode.width() / 4)
+            self.tableWidget_ProductCode.setColumnCount(4)
         self.tableWidget_ProductCode.setColumnWidth(0, width)
         self.tableWidget_ProductCode.setColumnWidth(1, width)
         self.tableWidget_ProductCode.setColumnWidth(2, width)
         self.tableWidget_ProductCode.setColumnWidth(3, width)
-        self.tableWidget_ProductCode.setColumnWidth(4, width)
+        if self.checkBox_nicelabel.isChecked() is False:
+            self.tableWidget_ProductCode.setColumnWidth(4, width)
         item = QtWidgets.QTableWidgetItem()
         item.setTextAlignment(QtCore.Qt.AlignCenter)
         self.tableWidget_ProductCode.setHorizontalHeaderItem(0, item)
@@ -144,9 +172,10 @@ class Ui_D_NewPCFolder(object):
         item = QtWidgets.QTableWidgetItem()
         item.setTextAlignment(QtCore.Qt.AlignCenter)
         self.tableWidget_ProductCode.setHorizontalHeaderItem(3, item)
-        item = QtWidgets.QTableWidgetItem()
-        item.setTextAlignment(QtCore.Qt.AlignCenter)
-        self.tableWidget_ProductCode.setHorizontalHeaderItem(4, item)
+        if self.checkBox_nicelabel.isChecked() is False:
+            item = QtWidgets.QTableWidgetItem()
+            item.setTextAlignment(QtCore.Qt.AlignCenter)
+            self.tableWidget_ProductCode.setHorizontalHeaderItem(4, item)
         _translate = QtCore.QCoreApplication.translate
         item = self.tableWidget_ProductCode.horizontalHeaderItem(0)
         item.setText(_translate("D_NewPCFolder", "Product Code"))
@@ -156,19 +185,23 @@ class Ui_D_NewPCFolder(object):
         item.setText(_translate("D_NewPCFolder", "Number of styles"))
         item = self.tableWidget_ProductCode.horizontalHeaderItem(3)
         item.setText(_translate("D_NewPCFolder", "Sub-Program"))
-        item = self.tableWidget_ProductCode.horizontalHeaderItem(4)
-        item.setText(_translate("D_NewPCFolder", "LOGO"))
+        if self.checkBox_nicelabel.isChecked() is False:
+            item = self.tableWidget_ProductCode.horizontalHeaderItem(4)
+            item.setText(_translate("D_NewPCFolder", "LOGO"))
 
     def addProductCode(self):
-        self.is_gmc()
+        self.create_table()
         if self.lineEdit_productCode.text() == "":
             message(QtWidgets.QMessageBox.Warning, "Product Code field cannot be empty")
-        elif self.comboBox_printingType.currentIndex() == 0:
+        elif self.comboBox_printingType.currentIndex() == 0 and self.checkBox_nicelabel.isChecked() is False:
             message(QtWidgets.QMessageBox.Warning, "Must select a printing type")
         else:
             rowPosition = self.tableWidget_ProductCode.rowCount()
             productCode = self.lineEdit_productCode.text()
-            printing_type = self.comboBox_printingType.currentText()
+            if self.checkBox_nicelabel.isChecked():
+                printing_type = "Thermal"
+            else:
+                printing_type = self.comboBox_printingType.currentText()
             num_styles = self.spinBox_numStyles.value()
             if num_styles > 1:
                 num_styles = str(num_styles)
@@ -210,12 +243,13 @@ class Ui_D_NewPCFolder(object):
                     pc.append(True)
                 else:
                     pc.append(False)
-                if self.tableWidget_ProductCode.item(row, 4).checkState() == 2:
-                    pc.append(True)
-                else:
-                    pc.append(False)
+                if self.checkBox_nicelabel.isChecked() is False:
+                    if self.tableWidget_ProductCode.item(row, 4).checkState() == 2:
+                        pc.append(True)
+                    else:
+                        pc.append(False)
                 pc_list.append(pc)
-            if make_folder(pc_list):
+            if make_folder(pc_list, self.checkBox_nicelabel.isChecked()):
                 message(QtWidgets.QMessageBox.Information, "Folder(s) created successfully")
                 self.reset_values()
         else:

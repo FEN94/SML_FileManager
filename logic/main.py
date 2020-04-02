@@ -60,10 +60,15 @@ def make_zip(productCode_list, printing_type):
     rmtree("Approvals")
 
 
-def make_folder(pc_list):
-    # [['MKAC001', printing_type, style_num, sub_program, logo]]
+def make_folder(pc_list, nice_label):
+    # [['product_code', printing_type, style_num, sub_program, logo]] for GMC
+    # [['product_code', printing_type, style_num, sub_program]] for NiceLabel
+    if nice_label:
+        gmc_nl = "C:/NiceLabel/"
+    else:
+        gmc_nl = "C:/GMC/"
     for pc in pc_list:
-        src_path = "C:/GMC/" + pc[1]
+        src_path = gmc_nl + pc[1]
         src_path += "/" + pc[0][:2]
         try:
             os.mkdir(src_path)
@@ -79,10 +84,11 @@ def make_folder(pc_list):
         rollback_folder = src_path
         try:
             os.mkdir(src_path)
-            if pc[4]:
-                os.mkdir(src_path + "/LOGO")
-            src_path += "/WFD"
-            os.mkdir(src_path)
+            if nice_label is False:
+                if pc[4]:
+                    os.mkdir(src_path + "/LOGO")
+                src_path += "/WFD"
+                os.mkdir(src_path)
             if pc[2] > 1:
                 make_styles_folder(src_path, pc[2])
             try:
@@ -103,9 +109,9 @@ def make_styles_folder(src_path, styles_num):
         if len(str(i)) == 1:
             os.mkdir(src_path + "/00" + str(i))
         elif len(str(i)) == 2:
-            os.mkdir(src_path + "0" + str(i))
+            os.mkdir(src_path + "/0" + str(i))
         elif len(str(i)) == 3:
-            os.mkdir(src_path + str(i))
+            os.mkdir(src_path + "/" + str(i))
 
 
 def gmc_product_code(product_code, printing_type):
