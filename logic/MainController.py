@@ -1,14 +1,27 @@
 import os
 from zipfile import ZipFile
 from shutil import copyfile, rmtree
-from PyQt5.QtWidgets import QMessageBox
+# from PyQt5.QtWidgets import QMessageBox
 from subprocess import Popen
+from logic.PrintingType import PrintingType
 
 
 class MainController():
 
     def __init__(self):
         self.found_pc = False
+    
+    def setup(self):
+        if 'sml_filemanager' not in next(os.walk('C:/'))[1]:
+            os.mkdir('C:/sml_filemanager')
+        try:
+            file = open('C:/sml_filemanager/data.txt', 'rt')
+        except FileNotFoundError:
+            # Create PrintingType objects
+            printing_types = ['Arc_Thermal', 'Digital', 'Offset', 'PFL', 'Woven']
+            for i in range(0, len(printing_types)-1):
+                printing_types[i] = PrintingType(printing_types[i])
+            open('C:/sml_filemanager/data.txt', 'xt')
 
     def search_pc(self, path, pc):
         file_list = os.listdir(path)
@@ -49,41 +62,41 @@ class MainController():
             zip_folder.write("Approvals/" + i)
         rmtree("Approvals")
 
-    def make_folder(self, pc_list):
-        # [['MKAC001', printing_type, style_num, sub_program, logo]]
-        for pc in pc_list:
-            src_path = "C:/GMC/" + pc[1]
-            src_path += "/" + pc[0][:2]
-            try:
-                os.mkdir(src_path)
-            except FileExistsError:
-                pass
-            if pc[3]:
-                src_path += "/" + pc[0][2:4]
-                try:
-                    os.mkdir(src_path)
-                except FileExistsError:
-                    pass
-            src_path += "/" + pc[0]
-            rollback_folder = src_path
-            try:
-                os.mkdir(src_path)
-                if pc[4]:
-                    os.mkdir(src_path + "/LOGO")
-                src_path += "/WFD"
-                os.mkdir(src_path)
-                if pc[2] > 1:
-                    self.make_styles_folder(src_path, pc[2])
-                try:
-                    copyfile("C:/GMC/Checklist.xlsx", src_path + "/Checklist_" + pc[0] + ".xlsx")
-                    # message(QMessageBox.Information, "Folder(s) created successfully")
-                except FileNotFoundError:
-                    self.message(QMessageBox.Critical, "Checklist not found in C:/GMC path")
-                    rmtree(rollback_folder)
-                    return False
-            except FileExistsError:
-                self.message(QMessageBox.Warning, pc[0] + " folder already exist")
-        return True
+    # def make_folder(self, pc_list):
+    #     # [['MKAC001', printing_type, style_num, sub_program, logo]]
+    #     for pc in pc_list:
+    #         src_path = "C:/GMC/" + pc[1]
+    #         src_path += "/" + pc[0][:2]
+    #         try:
+    #             os.mkdir(src_path)
+    #         except FileExistsError:
+    #             pass
+    #         if pc[3]:
+    #             src_path += "/" + pc[0][2:4]
+    #             try:
+    #                 os.mkdir(src_path)
+    #             except FileExistsError:
+    #                 pass
+    #         src_path += "/" + pc[0]
+    #         rollback_folder = src_path
+    #         try:
+    #             os.mkdir(src_path)
+    #             if pc[4]:
+    #                 os.mkdir(src_path + "/LOGO")
+    #             src_path += "/WFD"
+    #             os.mkdir(src_path)
+    #             if pc[2] > 1:
+    #                 self.make_styles_folder(src_path, pc[2])
+    #             try:
+    #                 copyfile("C:/GMC/Checklist.xlsx", src_path + "/Checklist_" + pc[0] + ".xlsx")
+    #                 # message(QMessageBox.Information, "Folder(s) created successfully")
+    #             except FileNotFoundError:
+    #                 self.message(QMessageBox.Critical, "Checklist not found in C:/GMC path")
+    #                 rmtree(rollback_folder)
+    #                 return False
+    #         except FileExistsError:
+    #             self.message(QMessageBox.Warning, pc[0] + " folder already exist")
+    #     return True
 
     def make_styles_folder(self, src_path, styles_num):
         for i in range(1, styles_num + 1):
@@ -94,16 +107,16 @@ class MainController():
             elif len(str(i)) == 3:
                 os.mkdir(src_path + str(i))
 
-    def open_product_code(self, product_code):
-        srcs_list = ["C:/GMC/ARC_Thermal", "C:/GMC/Digital", "C:/GMC/Offset",
-                     "C:/GMC/PFL", "C:/GMC/Woven"]
-        path = ""
-        for src_path in srcs_list:
-            path = self.search_pc(src_path, product_code)
-            if path != "" and path is not None:
-                path += "/WFD"
-                Popen('explorer ' + '"' + path.replace('/', '\\') + '"')
-                self.found_pc = False
-                break
-        if path == "" or path is None:
-            self.message(QMessageBox.Critical, "Product Code not found")
+    # def open_product_code(self, product_code):
+    #     srcs_list = ["C:/GMC/ARC_Thermal", "C:/GMC/Digital", "C:/GMC/Offset",
+    #                  "C:/GMC/PFL", "C:/GMC/Woven"]
+    #     path = ""
+    #     for src_path in srcs_list:
+    #         path = self.search_pc(src_path, product_code)
+    #         if path != "" and path is not None:
+    #             path += "/WFD"
+    #             Popen('explorer ' + '"' + path.replace('/', '\\') + '"')
+    #             self.found_pc = False
+    #             break
+    #     if path == "" or path is None:
+    #         self.message(QMessageBox.Critical, "Product Code not found")
