@@ -7,6 +7,7 @@ class ProductCode:
         self.printing_type = printing_type
         self.styles = 1
         self.image = False
+        self.paths = []
     
     def set_product_code(self, product_code):
         self.product_code = product_code
@@ -43,3 +44,9 @@ class ProductCode:
     
     def is_image(self):
         return self.image
+    
+    def set_paths(self, paths):
+        self.paths = paths
+
+    def get_paths(self):
+        return self.paths
