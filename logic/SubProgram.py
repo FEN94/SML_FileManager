@@ -1,6 +1,6 @@
 class SubProgram:
 
-    def __init__(self, program):
+    def __init__(self, sub_program):
         self.sub_program = sub_program
         self.pc_list = []
     
