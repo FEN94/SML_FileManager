@@ -16,7 +16,7 @@ def message(msg_type, msg):
     msg_window.exec()
 
 
-def search_pc(path, pc):
+def search_pc(path, pc):  # Return Product Code path
     global found_pc
     file_list = os.listdir(path)
     for i in file_list:
@@ -28,7 +28,7 @@ def search_pc(path, pc):
             try:
                 new_path = path+"/"+i
                 p = search_pc(new_path, pc)
-                if found_pc is True:
+                if found_pc:
                     return p
             except NotADirectoryError:
                 pass
@@ -41,23 +41,27 @@ def get_approval(app_path, pc):
             return approval
 
 
-def make_zip(productCode_list, printing_type):
+def make_zip(product_list, printing_type):
     global found_pc
-    pc_list = productCode_list.keys()
-    dst_path = "Approvals/"
-    src_path = "C:/GMC/" + printing_type + "/"
-    os.mkdir("Approvals")
-    for pc in pc_list:
-        pc_path = search_pc(src_path, pc)
+    pc_list = product_list.keys()
+    os.mkdir("C:/GMC/Approvals")
+    for product_code in pc_list:
         found_pc = False
-        approval = get_approval(pc_path + "/WFD/", pc)
-        app_path = pc_path + "/WFD/" + approval
-        copyfile(app_path, dst_path + approval)
-    zip_folder = ZipFile("Approvals.zip", "w")
-    approval_list = os.listdir("Approvals/")
+        path = search_pc("C:/GMC/"+printing_type, product_code) + "/WFD"
+        if product_list[product_code] > 1:
+            style_list = next(os.walk(path))[1]
+            for style in style_list:
+                path_wstyle = path + "/" + style
+                if product_code + style + "_APP.pdf" in os.listdir(path_wstyle):
+                    copyfile(path_wstyle+"/"+product_code+style+"_APP.pdf", "C:/GMC/Approvals/"+product_code+style+"_APP.pdf")
+        else:
+            if product_code + "001_APP.pdf" in os.listdir(path):
+                copyfile(path + "/" + product_code + "001_APP.pdf", "C:/GMC/Approvals/" + product_code + "001_APP.pdf")
+    zip_folder = ZipFile("C:/GMC/Approvals.zip", "w")
+    approval_list = os.listdir("C:/GMC/Approvals")
     for i in approval_list:
-        zip_folder.write("Approvals/"+i)
-    rmtree("Approvals")
+        zip_folder.write("C:/GMC/Approvals/" + i)
+    rmtree("C:/GMC/Approvals")
 
 
 def make_folder(pc_list, nice_label):
@@ -140,7 +144,7 @@ def open_product_code(gmc_or_nl, product_code, printing_type):
     elif gmc_or_nl == 1:
         return nicelabel_product_code(product_code)
 
-# make_zip({"US29HNW00C": 11, "US29HNW00E": 1, "US29M9W006":1, "US29M9W008":1}, "Offset")
+# make_zip({"US2900A": 2, "US2900B": 1}, "PFL")
 # make_folder([["US2900A", "PFL", 2, True, False], ["US2900B", "PFL", 3, True, False]])
 # copy_checklist(["US29HNW00C", "US29HNW00E", "US29M9W006", "US29M9W008"], "Offset")
 # open_product_code("ONBAMKV001".strip())

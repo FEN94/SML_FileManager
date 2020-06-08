@@ -197,7 +197,7 @@ class Ui_D_NewPCFolder(object):
             message(QtWidgets.QMessageBox.Warning, "Must select a printing type")
         else:
             rowPosition = self.tableWidget_ProductCode.rowCount()
-            productCode = self.lineEdit_productCode.text()
+            productCode = self.lineEdit_productCode.text().strip()
             if self.checkBox_nicelabel.isChecked():
                 printing_type = "Thermal"
             else:
