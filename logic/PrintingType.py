@@ -10,6 +10,12 @@ class PrintingType:
     def get_printing_type(self):
         return self.printing_type
     
+    def set_programs(self, programs):
+        self.programs = programs
+    
+    def get_programs(self):
+        return self.programs
+    
     def add_program(self, program):
         self.programs.append(program)
     
