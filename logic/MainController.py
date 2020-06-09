@@ -1,9 +1,10 @@
 import os
-from zipfile import ZipFile
-from shutil import copyfile, rmtree
+# from zipfile import ZipFile
+# from shutil import copyfile, rmtree
 # from PyQt5.QtWidgets import QMessageBox
-from subprocess import Popen
+# from subprocess import Popen
 from logic.PrintingType import PrintingType
+from logic.Program import Program
 
 
 class MainController():
@@ -11,6 +12,16 @@ class MainController():
     def __init__(self):
         self.found_pc = False
     
+    def look_4programs(self, obj_printing_type):
+        programs_list = next(os.walk('C:/' + obj_printing_type.get_printing_type()))
+        # add Program to Printing Type program list
+        for i in programs_list:
+            program = Program(i)
+            obj_printing_type.add_program(program)
+    
+    def look_4subp(self, obj_program):
+        pass
+
     def setup(self):
         if 'sml_filemanager' not in next(os.walk('C:/'))[1]:
             os.mkdir('C:/sml_filemanager')
@@ -19,8 +30,15 @@ class MainController():
         except FileNotFoundError:
             # Create PrintingType objects
             printing_types = ['Arc_Thermal', 'Digital', 'Offset', 'PFL', 'Woven']
+            obj_printing_types = []
             for i in range(0, len(printing_types)-1):
-                printing_types[i] = PrintingType(printing_types[i])
+                obj_printing_types[i] = PrintingType(obj_printing_types[i])
+            # Loop through all printing type folders
+            # for i in obj_printing_types:
+            #     programs_list = next(os.walk('C:/' + i.get_printing_type()))[1]
+            #     for j in programs_list:
+            #         program = Program(j)
+            #         i.add_program(program)
             open('C:/sml_filemanager/data.txt', 'xt')
 
     # def search_pc(self, path, pc):
